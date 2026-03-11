@@ -111,7 +111,7 @@ int q_func_str(void* f, void* s){
     char* str1 = (char*)f;
     char* str2 = (char*)s;
 
-    if (str1[0] > str2[1]) return 1;
+    if (str1[0] > str2[0]) return 1;
     else 0;
 }
 
@@ -150,15 +150,16 @@ int main(){
     add_value(st2, &HEAD);
     add_value(st1, &HEAD);
     
-    print_list(HEAD, print_str);
+    print_list(HEAD, print_str); // [ C Hello A my B world! ]
 
-    // sort_list(&HEAD, q_func_str);
+    sort_list(&HEAD, q_func_str);
     
-    // print_list(HEAD, print_str);
+    print_list(HEAD, print_str); // [ A my B world! C Hello ]
     
     clear_list(&HEAD);
     
-    pop_front(&HEAD);
+    pop_front(&HEAD); // List is empty!
+
 
     return 0;
 }
