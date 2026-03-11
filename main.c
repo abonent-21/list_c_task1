@@ -35,9 +35,7 @@ void clear_list(struct Node** head){
         return;
     }
     while (*head != NULL){
-        struct Node* temp = *head;
-        *head = temp->next_node;
-        free(temp); 
+        pop_front(head); 
     }
 }
 
