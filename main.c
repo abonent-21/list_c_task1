@@ -3,15 +3,17 @@
 
 struct Node{
     void* value;
+    int type_data;
     struct Node* next_node;
 };
 
 
 // add element at start of list
-void add_value(void* value, struct Node** head){
+void add_value(void* value, struct Node** head, int type){
     struct Node* new_head = (struct Node*)malloc(sizeof(struct Node));
     new_head->value = value;
     new_head->next_node = *head;
+    new_head->type_data = type;
     *head = new_head;
 }
 
@@ -114,50 +116,73 @@ int q_func_str(void* f, void* s){
 }
 
 
+int main_menu(){
+    puts("Choose option:");
+    puts("1) Pop first elem of list");
+    puts("2) Clear all list");
+    puts("3) Add elems at list");
+    puts("4) Print list");
+    puts("5) Exit");
+
+    int options;
+
+    while(1){
+        printf("Enter:");
+    
+        int num = scanf("%d", &options);
+
+        if (num == EOF) return 0;
+    
+        // if input is correct stop infinity loop
+        if (num == 1){
+            return options;
+        }
+        else{
+            puts("Incorrect input. Enter number 1-4");
+
+            // clear buffer
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF);
+        }
+
+    }
+
+   return 0;
+ }
+
+
+void add_element(){
+    
+    int type;
+
+    printf("Enter type elem: 1 - INT; 2 - STRING\n");
+    print("Enter:");
+    
+}
+   
+
 int main(){
     
-    int elem1 = 100;
-    int elem2 = -100;
-    int elem3 = 200;
+    puts("Programm one. Linked list.\n\n");
+
+    struct Node* HEAD = NULL; // pointer to the start of linked list
     
-    struct Node* HEAD = NULL;
+    while(1){
+        
+        int options = main_menu();
 
-    add_value(&elem1, &HEAD);
-    add_value(&elem2, &HEAD);
-    add_value(&elem3, &HEAD);
-
-    print_list(HEAD, print_int); // [ 200 -100 100 ]
-
-    sort_list(&HEAD, q_func_int);
-
-    print_list(HEAD, print_int); // [ -100 100 200 ]
+        switch(options){
+            case 1:
+                pop_front(&HEAD);
+            case 2:
+                clear_list(&HEAD);
+            case 3:
+                
+            case 4:
+            case 5:
+                break
+        }
+    }
     
-    pop_front(&HEAD);
-
-    print_list(HEAD, print_int); // [ 100 200 ]
-    
-    clear_list(&HEAD);
-
-    print_list(HEAD, print_int);
-
-    char st1[10] = "C Hello";
-    char st2[10] = "A my";
-    char st3[10] = "B world!";
-    
-    add_value(st3, &HEAD);
-    add_value(st2, &HEAD);
-    add_value(st1, &HEAD);
-    
-    print_list(HEAD, print_str); // [ C Hello A my B world! ]
-
-    sort_list(&HEAD, q_func_str);
-    
-    print_list(HEAD, print_str); // [ A my B world! C Hello ]
-    
-    clear_list(&HEAD);
-    
-    pop_front(&HEAD); // List is empty!
-
-
     return 0;
 }
